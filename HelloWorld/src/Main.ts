@@ -66,35 +66,121 @@
 //     }
 // }
 
-class Main extends egret.Sprite {
-    constructor() {
-        super()
-        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onState, this)
-    }
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onState, this)
+//     }
 
-    private onState(evt: egret.Event) {
-        // let shp = new egret.Shape()
-        // shp.graphics.lineStyle(10,0x00ff00)
-        // shp.graphics.beginFill(0xff0000)
-        // shp.graphics.drawRect(0, 0, 100, 100)
-        // shp.graphics.endFill()
+//     private onState(evt: egret.Event) {
+//         // let shp = new egret.Shape()
+//         // shp.graphics.lineStyle(10,0x00ff00)
+//         // shp.graphics.beginFill(0xff0000)
+//         // shp.graphics.drawRect(0, 0, 100, 100)
+//         // shp.graphics.endFill()
 
-        // let spr = new egret.Sprite()
-        // spr.x = 100
-        // spr.y = 100
-        // this.addChild(spr)
-        // spr.addChild(shp)
+//         // let spr = new egret.Sprite()
+//         // spr.x = 100
+//         // spr.y = 100
+//         // this.addChild(spr)
+//         // spr.addChild(shp)
 
-        // setTimeout(()=>{
-        //     shp.graphics.clear()
-        // },3000)
+//         // setTimeout(()=>{
+//         //     shp.graphics.clear()
+//         // },3000)
 
-        // 曲线
-        let shp = new egret.Shape()
-        shp.graphics.lineStyle(2,0x00ff00)
-        shp.graphics.moveTo(50,50)
-        shp.graphics.curveTo(100,100,200,50)
-        shp.graphics.endFill()
-        this.addChild(shp)
-    }
-}
+//         // 曲线
+//         let shp = new egret.Shape()
+//         shp.graphics.lineStyle(2,0x00ff00)
+//         shp.graphics.moveTo(50,50)
+//         shp.graphics.curveTo(100,100,200,50)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+//     }
+// }
+
+//抛物线
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+//     }
+
+//     private onAddToStage(evt:egret.Event) {
+//         let shp = new egret.Shape()
+//         shp.graphics.beginFill(0x1122cc)
+//         shp.graphics.drawArc(200,200,100,0,Math.PI,true)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+//     }
+// }
+
+//多个矩形
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+//     }
+
+//     private onAddToStage() {
+//         let shp = new egret.Shape()
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(0,0,50,50)
+//         shp.graphics.endFill()
+
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(50,50,50,50,)
+//         shp.graphics.endFill()
+
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(50,0,50,50)
+//         shp.graphics.endFill()
+
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(0,50,50,50)
+//         shp.graphics.endFill()
+
+//         this.addChild(shp)
+//     }
+// }
+
+//显示容器
+// class GridSprite extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.drawGrid()
+//     }
+
+//     private drawGrid() {
+//         let shp = new egret.Shape()
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(0, 0, 50, 50)
+//         shp.graphics.endFill()
+
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(50, 50, 50, 50, )
+//         shp.graphics.endFill()
+
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(50, 0, 50, 50)
+//         shp.graphics.endFill()
+
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(0, 50, 50, 50)
+//         shp.graphics.endFill()
+
+//         this.addChild(shp)
+//     }
+// }
+
+// class Main extends egret.DisplayObjectContainer {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this)
+//     }
+
+//     private onAddToStage() {
+//         let gridSprite: GridSprite = new GridSprite()
+//         this.addChild(gridSprite)
+//     }
+// }

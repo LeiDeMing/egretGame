@@ -69,36 +69,107 @@ r.prototype = e.prototype, t.prototype = new r();
 //         this.addEventListener(egret.Event.ENTER_FRAME,this.move,this)
 //     }
 // }
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onState, this)
+//     }
+//     private onState(evt: egret.Event) {
+//         // let shp = new egret.Shape()
+//         // shp.graphics.lineStyle(10,0x00ff00)
+//         // shp.graphics.beginFill(0xff0000)
+//         // shp.graphics.drawRect(0, 0, 100, 100)
+//         // shp.graphics.endFill()
+//         // let spr = new egret.Sprite()
+//         // spr.x = 100
+//         // spr.y = 100
+//         // this.addChild(spr)
+//         // spr.addChild(shp)
+//         // setTimeout(()=>{
+//         //     shp.graphics.clear()
+//         // },3000)
+//         // 曲线
+//         let shp = new egret.Shape()
+//         shp.graphics.lineStyle(2,0x00ff00)
+//         shp.graphics.moveTo(50,50)
+//         shp.graphics.curveTo(100,100,200,50)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+//     }
+// }
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+//     }
+//     private onAddToStage(evt:egret.Event) {
+//         let shp = new egret.Shape()
+//         shp.graphics.beginFill(0x1122cc)
+//         shp.graphics.drawArc(200,200,100,0,Math.PI,true)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+//     }
+// }
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+//     }
+//     private onAddToStage() {
+//         let shp = new egret.Shape()
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(0,0,50,50)
+//         shp.graphics.endFill()
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(50,50,50,50,)
+//         shp.graphics.endFill()
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(50,0,50,50)
+//         shp.graphics.endFill()
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(0,50,50,50)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+//     }
+// }
+var GridSprite = (function (_super) {
+    __extends(GridSprite, _super);
+    function GridSprite() {
+        var _this = _super.call(this) || this;
+        _this.drawGrid();
+        return _this;
+    }
+    GridSprite.prototype.drawGrid = function () {
+        var shp = new egret.Shape();
+        shp.graphics.beginFill(0x0000ff);
+        shp.graphics.drawRect(0, 0, 50, 50);
+        shp.graphics.endFill();
+        shp.graphics.beginFill(0x0000ff);
+        shp.graphics.drawRect(50, 50, 50, 50);
+        shp.graphics.endFill();
+        shp.graphics.beginFill(0xff0000);
+        shp.graphics.drawRect(50, 0, 50, 50);
+        shp.graphics.endFill();
+        shp.graphics.beginFill(0xff0000);
+        shp.graphics.drawRect(0, 50, 50, 50);
+        shp.graphics.endFill();
+        this.addChild(shp);
+    };
+    return GridSprite;
+}(egret.Sprite));
+__reflect(GridSprite.prototype, "GridSprite");
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         var _this = _super.call(this) || this;
-        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onState, _this);
+        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
-    Main.prototype.onState = function (evt) {
-        // let shp = new egret.Shape()
-        // shp.graphics.lineStyle(10,0x00ff00)
-        // shp.graphics.beginFill(0xff0000)
-        // shp.graphics.drawRect(0, 0, 100, 100)
-        // shp.graphics.endFill()
-        // let spr = new egret.Sprite()
-        // spr.x = 100
-        // spr.y = 100
-        // this.addChild(spr)
-        // spr.addChild(shp)
-        // setTimeout(()=>{
-        //     shp.graphics.clear()
-        // },3000)
-        // 曲线
-        var shp = new egret.Shape();
-        shp.graphics.lineStyle(2, 0x00ff00);
-        shp.graphics.moveTo(50, 50);
-        shp.graphics.curveTo(100, 100, 200, 50);
-        shp.graphics.endFill();
-        this.addChild(shp);
+    Main.prototype.onAddToStage = function () {
+        var gridSprite = new GridSprite();
+        this.addChild(gridSprite);
     };
     return Main;
-}(egret.Sprite));
+}(egret.DisplayObjectContainer));
 __reflect(Main.prototype, "Main");
 //# sourceMappingURL=Main.js.map

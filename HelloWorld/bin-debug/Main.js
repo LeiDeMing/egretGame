@@ -77,15 +77,26 @@ var Main = (function (_super) {
         return _this;
     }
     Main.prototype.onState = function (evt) {
+        // let shp = new egret.Shape()
+        // shp.graphics.lineStyle(10,0x00ff00)
+        // shp.graphics.beginFill(0xff0000)
+        // shp.graphics.drawRect(0, 0, 100, 100)
+        // shp.graphics.endFill()
+        // let spr = new egret.Sprite()
+        // spr.x = 100
+        // spr.y = 100
+        // this.addChild(spr)
+        // spr.addChild(shp)
+        // setTimeout(()=>{
+        //     shp.graphics.clear()
+        // },3000)
+        // 曲线
         var shp = new egret.Shape();
-        shp.graphics.beginFill(0xff0000);
-        shp.graphics.drawRect(0, 0, 100, 100);
+        shp.graphics.lineStyle(2, 0x00ff00);
+        shp.graphics.moveTo(50, 50);
+        shp.graphics.curveTo(100, 100, 200, 50);
         shp.graphics.endFill();
-        var spr = new egret.Sprite();
-        spr.x = 100;
-        spr.y = 100;
-        this.addChild(spr);
-        spr.addChild(shp);
+        this.addChild(shp);
     };
     return Main;
 }(egret.Sprite));

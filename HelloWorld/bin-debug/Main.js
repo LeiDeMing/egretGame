@@ -205,6 +205,15 @@ var Main = (function (_super) {
         sprCon2.graphics.endFill();
         this.addChild(sprCon2);
         sprCon2.y = 130;
+        var spr = new egret.Sprite();
+        spr.graphics.beginFill(0x0000ff);
+        spr.graphics.drawRect(0, 0, 50, 50);
+        spr.graphics.endFill();
+        // this.addChild(spr)
+        // sprCon2.addChild(spr)
+        spr.x = 10;
+        spr.y = 10;
+        console.log(spr.parent, sprCon1.parent);
     };
     return Main;
 }(egret.Sprite));

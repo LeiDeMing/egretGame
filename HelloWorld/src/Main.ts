@@ -206,25 +206,39 @@
 // }
 
 //坐标系
-class Main extends egret.Sprite{
-    constructor(){
+class Main extends egret.Sprite {
+    constructor() {
         super()
-        this.addEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this)
+        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
     }
 
-    onAddToStage(){
-        let sprCon1 : egret.Sprite = new egret.Sprite()
+    onAddToStage() {
+        let sprCon1: egret.Sprite = new egret.Sprite()
         sprCon1.graphics.beginFill(0x00ff00)
-        sprCon1.graphics.drawRect(0,0,100,100)
+        sprCon1.graphics.drawRect(0, 0, 100, 100)
         sprCon1.graphics.endFill()
         this.addChild(sprCon1)
-        sprCon1.x=120
+        sprCon1.x = 120
 
-        let sprCon2:egret.Sprite=new egret.Sprite()
+        let sprCon2: egret.Sprite = new egret.Sprite()
         sprCon2.graphics.beginFill(0xff0000)
-        sprCon2.graphics.drawRect(0,0,100,100)
+        sprCon2.graphics.drawRect(0, 0, 100, 100)
         sprCon2.graphics.endFill()
         this.addChild(sprCon2)
-        sprCon2.y=130
+        sprCon2.y = 130
+
+        let spr: egret.Sprite = new egret.Sprite()
+        spr.graphics.beginFill(0x0000ff)
+        spr.graphics.drawRect(0, 0, 50, 50)
+        spr.graphics.endFill()
+        // this.addChild(spr)
+        // sprCon2.addChild(spr)
+        spr.x = 10
+        spr.y = 10
+        console.log(spr.parent,sprCon1.parent)
+        //移除显示对象，必须判断显式对象的是否有parent
+        if(spr.parent){
+            this.removeChild(spr)
+        }
     }
 }

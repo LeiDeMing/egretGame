@@ -97,6 +97,7 @@ r.prototype = e.prototype, t.prototype = new r();
 //         this.addChild(shp)
 //     }
 // }
+//抛物线
 // class Main extends egret.Sprite {
 //     constructor() {
 //         super()
@@ -110,6 +111,7 @@ r.prototype = e.prototype, t.prototype = new r();
 //         this.addChild(shp)
 //     }
 // }
+//多个矩形
 // class Main extends egret.Sprite {
 //     constructor() {
 //         super()
@@ -132,32 +134,57 @@ r.prototype = e.prototype, t.prototype = new r();
 //         this.addChild(shp)
 //     }
 // }
-var GridSprite = (function (_super) {
-    __extends(GridSprite, _super);
-    function GridSprite() {
-        var _this = _super.call(this) || this;
-        _this.drawGrid();
-        return _this;
-    }
-    GridSprite.prototype.drawGrid = function () {
-        var shp = new egret.Shape();
-        shp.graphics.beginFill(0x0000ff);
-        shp.graphics.drawRect(0, 0, 50, 50);
-        shp.graphics.endFill();
-        shp.graphics.beginFill(0x0000ff);
-        shp.graphics.drawRect(50, 50, 50, 50);
-        shp.graphics.endFill();
-        shp.graphics.beginFill(0xff0000);
-        shp.graphics.drawRect(50, 0, 50, 50);
-        shp.graphics.endFill();
-        shp.graphics.beginFill(0xff0000);
-        shp.graphics.drawRect(0, 50, 50, 50);
-        shp.graphics.endFill();
-        this.addChild(shp);
-    };
-    return GridSprite;
-}(egret.Sprite));
-__reflect(GridSprite.prototype, "GridSprite");
+//显示容器
+// class GridSprite extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.drawGrid()
+//     }
+//     private drawGrid() {
+//         let shp = new egret.Shape()
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(0, 0, 50, 50)
+//         shp.graphics.endFill()
+//         shp.graphics.beginFill(0x0000ff)
+//         shp.graphics.drawRect(50, 50, 50, 50, )
+//         shp.graphics.endFill()
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(50, 0, 50, 50)
+//         shp.graphics.endFill()
+//         shp.graphics.beginFill(0xff0000)
+//         shp.graphics.drawRect(0, 50, 50, 50)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+//     }
+// }
+// class Main extends egret.DisplayObjectContainer {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this)
+//     }
+//     private onAddToStage() {
+//         let gridSprite: GridSprite = new GridSprite()
+//         this.addChild(gridSprite)
+//     }
+// }
+//显示/删除 显示对象
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this)
+//     }
+//     private onAddToStage() {
+//         let shp: egret.Sprite = new egret.Sprite()
+//         shp.graphics.beginFill(0x00ff00)
+//         shp.graphics.drawRect(0,0,100,100)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+//         setTimeout(()=>{
+//             this.removeChild(shp)
+//         },2000)
+//     }
+// }
+//坐标系
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
@@ -166,10 +193,20 @@ var Main = (function (_super) {
         return _this;
     }
     Main.prototype.onAddToStage = function () {
-        var gridSprite = new GridSprite();
-        this.addChild(gridSprite);
+        var sprCon1 = new egret.Sprite();
+        sprCon1.graphics.beginFill(0x00ff00);
+        sprCon1.graphics.drawRect(0, 0, 100, 100);
+        sprCon1.graphics.endFill();
+        this.addChild(sprCon1);
+        sprCon1.x = 120;
+        var sprCon2 = new egret.Sprite();
+        sprCon2.graphics.beginFill(0xff0000);
+        sprCon2.graphics.drawRect(0, 0, 100, 100);
+        sprCon2.graphics.endFill();
+        this.addChild(sprCon2);
+        sprCon2.y = 130;
     };
     return Main;
-}(egret.DisplayObjectContainer));
+}(egret.Sprite));
 __reflect(Main.prototype, "Main");
 //# sourceMappingURL=Main.js.map

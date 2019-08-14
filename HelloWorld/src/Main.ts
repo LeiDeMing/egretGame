@@ -206,39 +206,75 @@
 // }
 
 //坐标系
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+//     }
+
+//     private onAddToStage() {
+//         let sprCon1: egret.Sprite = new egret.Sprite()
+//         sprCon1.graphics.beginFill(0x00ff00)
+//         sprCon1.graphics.drawRect(0, 0, 100, 100)
+//         sprCon1.graphics.endFill()
+//         this.addChild(sprCon1)
+//         sprCon1.x = 120
+
+//         let sprCon2: egret.Sprite = new egret.Sprite()
+//         sprCon2.graphics.beginFill(0xff0000)
+//         sprCon2.graphics.drawRect(0, 0, 100, 100)
+//         sprCon2.graphics.endFill()
+//         this.addChild(sprCon2)
+//         sprCon2.y = 130
+
+//         let spr: egret.Sprite = new egret.Sprite()
+//         spr.graphics.beginFill(0x0000ff)
+//         spr.graphics.drawRect(0, 0, 50, 50)
+//         spr.graphics.endFill()
+//         // this.addChild(spr)
+//         // sprCon2.addChild(spr)
+//         spr.x = 10
+//         spr.y = 10
+//         console.log(spr.parent,sprCon1.parent)
+//         //移除显示对象，必须判断显式对象的是否有parent
+//         if(spr.parent){
+//             this.removeChild(spr)
+//         }
+//     }
+// }
+
+//遮罩
 class Main extends egret.Sprite {
     constructor() {
         super()
-        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
     }
 
-    onAddToStage() {
-        let sprCon1: egret.Sprite = new egret.Sprite()
-        sprCon1.graphics.beginFill(0x00ff00)
-        sprCon1.graphics.drawRect(0, 0, 100, 100)
-        sprCon1.graphics.endFill()
-        this.addChild(sprCon1)
-        sprCon1.x = 120
+    private onStage() {
+        this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
+        RES.loadConfig("resource/default.res.json", "resource/")
+    }
 
-        let sprCon2: egret.Sprite = new egret.Sprite()
-        sprCon2.graphics.beginFill(0xff0000)
-        sprCon2.graphics.drawRect(0, 0, 100, 100)
-        sprCon2.graphics.endFill()
-        this.addChild(sprCon2)
-        sprCon2.y = 130
+    private configcom(evt: RES.ResourceEvent) {
+        RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
+        RES.loadGroup("preload")
+    }
 
-        let spr: egret.Sprite = new egret.Sprite()
-        spr.graphics.beginFill(0x0000ff)
-        spr.graphics.drawRect(0, 0, 50, 50)
-        spr.graphics.endFill()
-        // this.addChild(spr)
-        // sprCon2.addChild(spr)
-        spr.x = 10
-        spr.y = 10
-        console.log(spr.parent,sprCon1.parent)
-        //移除显示对象，必须判断显式对象的是否有parent
-        if(spr.parent){
-            this.removeChild(spr)
-        }
+    private onResourceLoadComplete(evt: RES.ResourceEvent) {
+        RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
+        this.init()
+    }
+
+    private init() {
+        let bmg: egret.Bitmap = new egret.Bitmap()
+        bmg.texture = RES.getRes('bg_jpg')
+        bmg.width = 800
+        bmg.height = 600
+        this.addChild(bmg)
+
+        let rect: egret.Rectangle = new egret.Rectangle(250, 50, 800, 600)
+        bmg.mask = rect
     }
 }

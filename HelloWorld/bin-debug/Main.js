@@ -185,35 +185,69 @@ r.prototype = e.prototype, t.prototype = new r();
 //     }
 // }
 //坐标系
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+//     }
+//     private onAddToStage() {
+//         let sprCon1: egret.Sprite = new egret.Sprite()
+//         sprCon1.graphics.beginFill(0x00ff00)
+//         sprCon1.graphics.drawRect(0, 0, 100, 100)
+//         sprCon1.graphics.endFill()
+//         this.addChild(sprCon1)
+//         sprCon1.x = 120
+//         let sprCon2: egret.Sprite = new egret.Sprite()
+//         sprCon2.graphics.beginFill(0xff0000)
+//         sprCon2.graphics.drawRect(0, 0, 100, 100)
+//         sprCon2.graphics.endFill()
+//         this.addChild(sprCon2)
+//         sprCon2.y = 130
+//         let spr: egret.Sprite = new egret.Sprite()
+//         spr.graphics.beginFill(0x0000ff)
+//         spr.graphics.drawRect(0, 0, 50, 50)
+//         spr.graphics.endFill()
+//         // this.addChild(spr)
+//         // sprCon2.addChild(spr)
+//         spr.x = 10
+//         spr.y = 10
+//         console.log(spr.parent,sprCon1.parent)
+//         //移除显示对象，必须判断显式对象的是否有parent
+//         if(spr.parent){
+//             this.removeChild(spr)
+//         }
+//     }
+// }
+//遮罩
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         var _this = _super.call(this) || this;
-        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
+        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onStage, _this);
         return _this;
     }
-    Main.prototype.onAddToStage = function () {
-        var sprCon1 = new egret.Sprite();
-        sprCon1.graphics.beginFill(0x00ff00);
-        sprCon1.graphics.drawRect(0, 0, 100, 100);
-        sprCon1.graphics.endFill();
-        this.addChild(sprCon1);
-        sprCon1.x = 120;
-        var sprCon2 = new egret.Sprite();
-        sprCon2.graphics.beginFill(0xff0000);
-        sprCon2.graphics.drawRect(0, 0, 100, 100);
-        sprCon2.graphics.endFill();
-        this.addChild(sprCon2);
-        sprCon2.y = 130;
-        var spr = new egret.Sprite();
-        spr.graphics.beginFill(0x0000ff);
-        spr.graphics.drawRect(0, 0, 50, 50);
-        spr.graphics.endFill();
-        // this.addChild(spr)
-        // sprCon2.addChild(spr)
-        spr.x = 10;
-        spr.y = 10;
-        console.log(spr.parent, sprCon1.parent);
+    Main.prototype.onStage = function () {
+        this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this);
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this);
+        RES.loadConfig("resource/default.res.json", "resource/");
+    };
+    Main.prototype.configcom = function (evt) {
+        RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+        RES.loadGroup("preload");
+    };
+    Main.prototype.onResourceLoadComplete = function (evt) {
+        RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+        this.init();
+    };
+    Main.prototype.init = function () {
+        var bmg = new egret.Bitmap();
+        bmg.texture = RES.getRes('bg_jpg');
+        bmg.width = 800;
+        bmg.height = 600;
+        this.addChild(bmg);
+        var rect = new egret.Rectangle(250, 50, 800, 600);
+        bmg.mask = rect;
     };
     return Main;
 }(egret.Sprite));

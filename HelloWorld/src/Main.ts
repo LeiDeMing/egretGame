@@ -244,37 +244,117 @@
 // }
 
 //遮罩
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
+//     }
+
+//     private onStage() {
+//         this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
+//         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
+//         RES.loadConfig("resource/default.res.json", "resource/")
+//     }
+
+//     private configcom(evt: RES.ResourceEvent) {
+//         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
+//         RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
+//         RES.loadGroup("preload")
+//     }
+
+//     private onResourceLoadComplete(evt: RES.ResourceEvent) {
+//         RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
+//         this.init()
+//     }
+
+//     private init() {
+//         let bmg: egret.Bitmap = new egret.Bitmap()
+//         bmg.texture = RES.getRes('bg_jpg')
+//         bmg.width = 800
+//         bmg.height = 600
+//         this.addChild(bmg)
+
+//         let rect: egret.Rectangle = new egret.Rectangle(250, 50, 800, 600)
+//         bmg.mask = rect
+//     }
+// }
+
+//非精确碰撞检测
+// class Main extends egret.DisplayObjectContainer {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
+//     }
+
+//     private onStage(evt: egret.Event) {
+//         let shp: egret.Shape = new egret.Shape()
+//         shp.graphics.beginFill(0x00ff00)
+//         shp.graphics.drawRect(0, 0, 100, 100)
+//         shp.graphics.endFill()
+//         this.addChild(shp)
+
+//         console.log(shp.hitTestPoint(30, 30))
+//         console.log(shp.hitTestPoint(300, 400))
+//     }
+// }
+
+//精确碰撞
+// class Main extends egret.Sprite {
+//     constructor() {
+//         super()
+//         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
+//     }
+
+//     private onStage() {
+//         this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
+//         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
+//         RES.loadConfig("resource/default.res.json", "resource/")
+//     }
+
+//     private configcom(evt: RES.ResourceEvent) {
+//         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
+//         RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
+//         RES.loadGroup("preload")
+//     }
+
+//     private onResourceLoadComplete(evt: RES.ResourceEvent) {
+//         RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
+//         this.init()
+//     }
+
+//     private init() {
+//         let bmg: egret.Bitmap = new egret.Bitmap()
+//         bmg.texture = RES.getRes('bg_jpg')
+//         bmg.width = 300
+//         bmg.height = 400
+//         this.addChild(bmg)
+
+//         console.log(bmg.hitTestPoint(30, 30, true))
+//     }
+// }
+
+//包围盒碰撞
 class Main extends egret.Sprite {
     constructor() {
         super()
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
     }
 
-    private onStage() {
-        this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onStage, this)
-        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
-        RES.loadConfig("resource/default.res.json", "resource/")
-    }
+    private onStage(evt: egret.Event) {
+        let shp1: egret.Shape = new egret.Shape()
+        shp1.graphics.beginFill(0xff0000)
+        shp1.graphics.drawRect(0, 0, 100, 100)
+        shp1.graphics.endFill()
+        this.addChild(shp1)
 
-    private configcom(evt: RES.ResourceEvent) {
-        RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.configcom, this)
-        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
-        RES.loadGroup("preload")
-    }
+        let shp2: egret.Shape = new egret.Shape()
+        shp2.graphics.beginFill(0xff0000)
+        shp2.graphics.drawRect(250, 250, 50, 50)
+        shp2.graphics.endFill()
+        this.addChild(shp2)
 
-    private onResourceLoadComplete(evt: RES.ResourceEvent) {
-        RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this)
-        this.init()
-    }
-
-    private init() {
-        let bmg: egret.Bitmap = new egret.Bitmap()
-        bmg.texture = RES.getRes('bg_jpg')
-        bmg.width = 800
-        bmg.height = 600
-        this.addChild(bmg)
-
-        let rect: egret.Rectangle = new egret.Rectangle(250, 50, 800, 600)
-        bmg.mask = rect
+        let rect1: egret.Rectangle = new egret.Rectangle(shp1.x, shp1.y, shp1.width, shp1.height)
+        let rect2: egret.Rectangle = new egret.Rectangle(shp2.x, shp2.y, shp2.width, shp2.height)
+        console.log(rect1.intersects(rect2))
     }
 }
